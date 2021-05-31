@@ -67,6 +67,95 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // TODO - Make buttons functional
+    errorBtns[0].addEventListener('click', () => {
+      console.log("Console Log Demo");
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error("Console Error Demo");
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.dir(document.head);
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.dirxml(document.querySelector('body'));
+    });
+
+    errorBtns[4].addEventListener('click', () => {
+      console.group("Group Start");
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.groupEnd("Group End");
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.table([
+        {
+          a: "(0,0)",
+          b: "(0,1)",
+          c: "(0,2)",
+          d: "(0,3)"
+        },
+        {
+          a: "(1,0)",
+          b: "(1,1)",
+          c: "(1,2)",
+          d: "(1,3)"
+        },
+        {
+          a: "(2,0)",
+          b: "(2,1)",
+          c: "(2,2)",
+          d: "(2,3)"
+        },
+        {
+          a: "(3,0)",
+          b: "(3,1)",
+          c: "(3,2)",
+          d: "(3,3)"
+        }
+      ])
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.time();
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.timeEnd();
+    });
+
+    errorBtns[9].addEventListener('click', () => {
+      const foo = () => { bar(); };
+      const bar = () => { console.trace(); };
+      foo();
+    });
+
+  class CustomError extends Error {
+    constructor(message) {
+    super(message); // (1)
+    this.name = "CustomError"; // (2)
+    }
+  }
+
+  function test() {
+    throw new CustomError("There is an ERROR!!!");
+  }
+
+  errorBtns[10].addEventListener('click', () => {
+    try {
+      test();
+    } catch(err) {
+      alert(err.message); // Whoops!
+      alert(err.name); // ValidationError
+      alert(err.stack); // a list of nested calls with line numbers for each
+    } finally {
+        console.log("Finally");
+    }
+  });
   </script>
 </body>
 </html>
